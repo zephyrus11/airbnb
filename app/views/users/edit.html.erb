@@ -1,0 +1,24 @@
+<h1>Edit Profile</h1>
+
+<%= form_for :user, url: "/users/edit", action: :update, method: :post do |form| %>
+  
+    <h6>First name: <%= @user.first_name%></h6>
+    <h6>Last name: <%= @user.last_name%></h6>
+    <h6>Email: <%= form.text_field :email %> </h6>
+    <h6>Phone:<%= form.text_field :phone %> </h6>
+
+    <% if @user.gender == 1 %>
+    <% a = "Female" %>
+    <h6>Gender: <%= a %></h6>
+    <% else %>
+    <% b = "Male" %>
+    <h6>Gender: <%= b %></h6>
+    <% end %>
+    
+    <h6>Birthday: <%= @user.birthdate%></h6>
+    <h6>Uploaded image: <%= form.file_field :avatar %></h6>
+
+
+    <%= form.submit "Update" %>
+
+<% end %>

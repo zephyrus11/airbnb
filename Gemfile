@@ -59,3 +59,23 @@ gem "bcrypt"
 gem "figaro"
 
 gem "omniauth-google-oauth2"
+
+gem "faker"
+
+gem 'kaminari'
+
+gem 'carrierwave', '~> 1.0'
+
+gem 'mini_magick'
+
+gem 'braintree'
+
+gem "letter_opener", :group => :development
+
+gem "sidekiq"
+
+gem 'rails_12factor', group: :production
+
+gem 'fog-aws'
+
+gem 'will_paginate'

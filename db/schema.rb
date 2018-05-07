@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180424063356) do
+ActiveRecord::Schema.define(version: 20180502100000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,20 +25,61 @@ ActiveRecord::Schema.define(version: 20180424063356) do
     t.index ["user_id"], name: "index_authentications_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "email",                          null: false
-    t.string   "encrypted_password", limit: 128, null: false
-    t.string   "confirmation_token", limit: 128
-    t.string   "remember_token",     limit: 128, null: false
+  create_table "listings", force: :cascade do |t|
     t.string   "name"
-    t.integer  "age"
+    t.string   "place_type"
+    t.string   "property_type"
+    t.integer  "room_number"
+    t.integer  "bed_number"
+    t.integer  "guest_number"
+    t.string   "country"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zipcode"
+    t.string   "address"
+    t.integer  "price"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "verification",  default: false
+    t.json     "images"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "listing_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "price"
+    t.integer  "total"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "guest_number"
+    t.index ["listing_id"], name: "index_reservations_on_listing_id", using: :btree
+    t.index ["user_id"], name: "index_reservations_on_user_id", using: :btree
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "email",                                      null: false
+    t.string   "encrypted_password", limit: 128,             null: false
+    t.string   "confirmation_token", limit: 128
+    t.string   "remember_token",     limit: 128,             null: false
     t.string   "gender"
     t.string   "phone"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "country"
+    t.date     "birthdate"
+    t.integer  "role",                           default: 0
+    t.string   "avatar"
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
   add_foreign_key "authentications", "users"
+  add_foreign_key "reservations", "listings"
+  add_foreign_key "reservations", "users"
 end

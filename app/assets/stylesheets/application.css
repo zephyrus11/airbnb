@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+
+.rounded-circle {
+	position: relative;
+  width: 50px;
+ 
+  overflow: hidden;
+  border-radius: 50%;
+}
