@@ -47,11 +47,13 @@ class UsersController < Clearance::UsersController
 
     def update
           @user = current_user
-          if @user.update(permit_params)
-              redirect_to :back
-          else
-              render 'edit'
-          end
+          @user.update(permit_params)
+          redirect_to :back
+          # if @user.update(permit_params)
+          #     redirect_to :back
+          # else
+          #     render 'edit'
+          # end
       end
 
      private
